@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:talabat_pos/routes/route.dart';
-import 'package:talabat_pos/screens/home.dart';
-import 'package:talabat_pos/screens/login.dart';
 import 'package:talabat_pos/services/category_service.dart';
 import 'package:talabat_pos/services/item_service.dart';
 import 'package:talabat_pos/services/login_service.dart';

@@ -34,276 +34,279 @@ class _RightHomeState extends State<RightHome> {
         borderRadius: 10,
         height: MediaQuery.of(context).size.height * 0.9,
         width: MediaQuery.of(context).size.width,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "My Cart " +
-                        "${orderService.getOrder.items == null ? 0 : orderService.getOrder.items!.length}",
-                    style: StylesApp.titleDescStyle,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      // هنا يتم تنفيذ الكود عند الضغط على الزر
-                    },
-                    child: const Text("Clear All ",
-                      style: StylesApp.normalStyle,),
-                  ),
-                ],
+        child: Padding(
+          padding: const EdgeInsets.all(0.001),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "My Cart " +
+                          "${orderService.getOrder.items == null ? 0 : orderService.getOrder.items!.length}",
+                      style: StylesApp.titleDescStyle,
+                    ),
+                    const Text(
+                      "Clear All ",
+                      style: StylesApp.normalStyle,
+                    ),
+                  ],
+                ),
               ),
-            ),
 
-            orderService.getOrder.items == null
-                ? Container(
-                    height: MediaQuery.of(context).size.height * 0.45,
-                    width: MediaQuery.of(context).size.width,
-                  )
-                : Container(
-                    height: MediaQuery.of(context).size.height * 0.45,
-                    width: MediaQuery.of(context).size.width,
-                    child: ListView.builder(
-                      itemCount: orderService.getOrder.items!.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          leading: ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: Image.network(
-                              width: MediaQuery.of(context).size.width * 0.06,
-                              height: MediaQuery.of(context).size.height * 0.09,
-                              orderService.getOrder.items![index].imagePath
-                                  .toString(),
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return const Icon(Icons.error);
-                              },
-                              loadingBuilder:
-                                  (context, child, loadingProgress) {
-                                if (loadingProgress == null) {
-                                  return child;
-                                } else {
-                                  return CircularProgressIndicator(
-                                    color: AppColors.primaryColor,
-                                  );
-                                }
-                              },
-                            ),
-                          ),
-                          title: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+              orderService.getOrder.items == null
+                  ? SizedBox(
+                height: MediaQuery.of(context).size.height * 0.45,
+                width: MediaQuery.of(context).size.width,
+              )
+                  : Container(
+                height: MediaQuery.of(context).size.height * 0.45,
+                width: MediaQuery.of(context).size.width,
+                child: ListView.builder(
+                  itemCount: orderService.getOrder.items!.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(10.0),
+                        child: Image.network(
+                          width: MediaQuery.of(context).size.width * 0.06,
+                          height: MediaQuery.of(context).size.height * 0.09,
+                          orderService.getOrder.items![index].imagePath
+                              .toString(),
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return const Icon(Icons.error);
+                          },
+                          loadingBuilder:
+                              (context, child, loadingProgress) {
+                            if (loadingProgress == null) {
+                              return child;
+                            } else {
+                              return CircularProgressIndicator(
+                                color: AppColors.primaryColor,
+                              );
+                            }
+                          },
+                        ),
+                      ),
+                      title: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    orderService.getOrder.items![index].name
-                                        .toString(),
-                                    style: StylesApp.itemNameStyle,
-                                  ),
-                                  IconButton(
-                                      onPressed: () {
-                                        orderService.deleteItem(index);
-                                      },
-                                      icon: Icon(
-                                        Icons.delete,
-                                        color: AppColors.scondaryColor,
-                                        size: 20,
-                                      ))
-                                ],
+                              Text(
+                                orderService.getOrder.items![index].name
+                                    .toString(),
+                                style: StylesApp.itemNameStyle,
                               ),
-                              SpacesApp.spaceH_10,
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      InkWell(
-                                        onTap: () {},
-                                        child: ClayContainer(
-                                          spread: 0,
-                                          color: AppColors.primaryColor,
-                                          borderRadius: 5,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.025,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.045,
-                                          child: Center(
-                                            child: Text(
-                                              "-",
-                                              style: StylesApp.minusStyleSelect,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SpacesApp.spaceW_10,
-                                      Text(
-                                        "1",
-                                        style: StylesApp.itemNameStyle,
-                                      ),
-                                      SpacesApp.spaceW_10,
-                                      InkWell(
-                                        onTap: () {},
-                                        child: ClayContainer(
-                                          spread: 0,
-                                          color: AppColors.primaryColor,
-                                          borderRadius: 5,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.025,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.045,
-                                          child: Center(
-                                            child: Text(
-                                              "+",
-                                              style: StylesApp.minusStyleSelect,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Text(
-                                    orderService.getOrder.items![index].price
-                                        .toString(),
-                                    style: StylesApp.itemNameStyle,
-                                  ),
-                                ],
-                              ),
-                              SpacesApp.spaceH_20,
+                              IconButton(
+                                  onPressed: () {
+                                    orderService.deleteItem(index);
+                                  },
+                                  icon: Icon(
+                                    Icons.delete,
+                                    color: AppColors.scondaryColor,
+                                    size: 20,
+                                  ))
                             ],
                           ),
-                        );
-                      },
+                          SpacesApp.spaceH_10,
+                          Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  InkWell(
+                                    onTap: () {},
+                                    child: ClayContainer(
+                                      spread: 0,
+                                      color: AppColors.primaryColor,
+                                      borderRadius: 5,
+                                      width: MediaQuery.of(context)
+                                          .size
+                                          .width *
+                                          0.025,
+                                      height: MediaQuery.of(context)
+                                          .size
+                                          .height *
+                                          0.045,
+                                      child: Center(
+                                        child: Text(
+                                          "-",
+                                          style: StylesApp.minusStyleSelect,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SpacesApp.spaceW_10,
+                                  Text(
+                                    "1",
+                                    style: StylesApp.itemNameStyle,
+                                  ),
+                                  SpacesApp.spaceW_10,
+                                  InkWell(
+                                    onTap: () {},
+                                    child: ClayContainer(
+                                      spread: 0,
+                                      color: AppColors.primaryColor,
+                                      borderRadius: 5,
+                                      width: MediaQuery.of(context)
+                                          .size
+                                          .width *
+                                          0.025,
+                                      height: MediaQuery.of(context)
+                                          .size
+                                          .height *
+                                          0.045,
+                                      child: Center(
+                                        child: Text(
+                                          "+",
+                                          style: StylesApp.minusStyleSelect,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                orderService.getOrder.items![index].price
+                                    .toString(),
+                                style: StylesApp.itemNameStyle,
+                              ),
+                            ],
+                          ),
+                          SpacesApp.spaceH_10,
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+              SpacesApp.spaceH_10,
+
+              ///calc
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 8.0,
+                  right: 8.0,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "SubTotal",
+                      style: StylesApp.calcStyle,
                     ),
-                  ),
-            SpacesApp.spaceH_10,
+                    Text(
+                      orderService.getOrder.subTotal == null
+                          ? "0.0"
+                          : orderService.getOrder.subTotal.toString(),
+                      style: StylesApp.calcStyle,
+                    ),
+                  ],
+                ),
+              ),
+              const Divider(
+                thickness: 0,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 8.0,
+                  right: 8.0,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Discount",
+                      style: StylesApp.calcStyle,
+                    ),
+                    Text(
+                      "0.0",
+                      style: StylesApp.calcStyle,
+                    ),
+                  ],
+                ),
+              ),
+              const Divider(
+                thickness: 0,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 8.0,
+                  right: 8.0,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "VAT",
+                      style: StylesApp.calcStyle,
+                    ),
+                    Text(
+                      "0.0",
+                      style: StylesApp.calcStyle,
+                    ),
+                  ],
+                ),
+              ),
+              const Divider(
+                thickness: 0,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 8.0,
+                  right: 8.0,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Total",
+                      style: StylesApp.totalStyle,
+                    ),
+                    Text(
+                      orderService.getOrder.total == null
+                          ? "0.0"
+                          : orderService.getOrder.total.toString(),
+                      style: StylesApp.totalStyle,
+                    ),
+                  ],
+                ),
+              ),
+              SpacesApp.spaceH_10,
+              //bun Payment
 
-            ///calc
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 8.0,
-                right: 8.0,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "SubTotal",
-                    style: StylesApp.calcStyle,
-                  ),
-                  Text(
-                    orderService.getOrder.subTotal == null
-                        ? "0.0"
-                        : orderService.getOrder.subTotal.toString(),
-                    style: StylesApp.calcStyle,
-                  ),
-                ],
-              ),
-            ),
-            const Divider(
-              thickness: 0,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 8.0,
-                right: 8.0,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Discount",
-                    style: StylesApp.calcStyle,
-                  ),
-                  Text(
-                    "0.0",
-                    style: StylesApp.calcStyle,
-                  ),
-                ],
-              ),
-            ),
-            const Divider(
-              thickness: 0,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 8.0,
-                right: 8.0,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "VAT",
-                    style: StylesApp.calcStyle,
-                  ),
-                  Text(
-                    "0.0",
-                    style: StylesApp.calcStyle,
-                  ),
-                ],
-              ),
-            ),
-            const Divider(
-              thickness: 0,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 8.0,
-                right: 8.0,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Total",
-                    style: StylesApp.totalStyle,
-                  ),
-                  Text(
-                    orderService.getOrder.total == null
-                        ? "0.0"
-                        : orderService.getOrder.total.toString(),
-                    style: StylesApp.totalStyle,
-                  ),
-                ],
-              ),
-            ),
-            SpacesApp.spaceH_20,
-            //bun Payment
+              SizedBox(
 
-            FilledButton(
-              style: FilledButton.styleFrom(
-                fixedSize: Size(MediaQuery.of(context).size.width * 0.2,
-                    MediaQuery.of(context).size.height * 0.07),
-                backgroundColor: AppColors.primaryColor,
+                child: FilledButton(
+                    style: FilledButton.styleFrom(
+                      fixedSize: Size(MediaQuery.of(context).size.width * 0.2,
+                          MediaQuery.of(context).size.height * 0.07),
+                      backgroundColor: AppColors.primaryColor,
+                    ),
+                    onPressed: () {
+                      if (orderService.getOrder.items!.isNotEmpty) {
+                        showDialog(
+                            barrierDismissible: false,
+                            context: context,
+                            builder: (BuildContext context) {
+                              return const Checkout();
+                            });
+                      }
+                    },
+                    child:  const Text("Checkout"),
+                  ),
               ),
-              onPressed: () {
-                if (orderService.getOrder.items!.isNotEmpty) {
-                  showDialog(
-                      barrierDismissible: false,
-                      context: context,
-                      builder: (BuildContext context) {
-                        return const Checkout();
-                      });
-                }
-              },
-              child: Text("Checkout"),
-            )
-          ],
+            ],
+          ),
         ),
       ),
     );

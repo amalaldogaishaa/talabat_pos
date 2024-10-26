@@ -1,8 +1,6 @@
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:talabat_pos/models/category_model.dart';
-import 'package:talabat_pos/models/item_model.dart';
 import 'package:talabat_pos/services/category_service.dart';
 import 'package:talabat_pos/services/item_service.dart';
 import 'package:talabat_pos/services/order_service.dart';
@@ -42,10 +40,7 @@ class _LeftHomeState extends State<LeftHome> {
     final orderService = Provider.of<OrderService>(
       context,
     );
-    /*  return Consumer<CategoryService>(
-        child: Text("data"),
-        //future: context.read<CategoryService>().getCategories(),
-        builder: (context, snapshot, _) { */
+
     if (categoryService.categoryModel == null) {
       return Center(
           child: CircularProgressIndicator(
@@ -66,9 +61,12 @@ class _LeftHomeState extends State<LeftHome> {
                 ImageApp.logo,
                 width: MediaQuery.of(context).size.width * 0.1,
               ),
-              Icon(
-                Icons.language_outlined,
-                color: AppColors.primaryColor,
+              IconButton(
+                onPressed: () {  },
+                icon: Icon(
+                  Icons.language_outlined,
+                  color: AppColors.primaryColor,
+                ),
               )
             ],
           ),
@@ -143,7 +141,7 @@ class _LeftHomeState extends State<LeftHome> {
           ),
           SpacesApp.spaceH_10,
           const Padding(
-            padding: const EdgeInsets.only(left: 8.0, top: 8),
+            padding: EdgeInsets.only(left: 8.0, top: 8),
             child: Text(
               "Fried",
               style: StylesApp.titleDescStyle,
@@ -178,8 +176,6 @@ class _LeftHomeState extends State<LeftHome> {
                             orderService.calc();
                           },
                           child: Container(
-                            /*   color: AppColors.white,
-                        spread: 1, */
                             width: MediaQuery.of(context).size.width * 0.07,
                             height: MediaQuery.of(context).size.height * 0.02,
                             child: Column(
@@ -237,21 +233,14 @@ class _LeftHomeState extends State<LeftHome> {
                     },
                   ),
                 )
-
-          // _items(context, itemService),
         ],
       ),
     );
   }
 }
 
-/* Widget _categories(context, snapshot) {
-  return } */
 
 Widget _items(context, itemService) {
-  /*  return Consumer<ItemService>(
-      //future: context.read<CategoryService>().getCategories(),
-      builder: (context, snapshot, _) { */
   if (itemService.itemModel == null) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.4,
